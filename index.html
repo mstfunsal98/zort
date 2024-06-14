@@ -8,74 +8,42 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Hesaplama PWA">
     <link rel="apple-touch-icon" href="icons/icon-192x192.png">
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #000000;
-            color: #ECEBE4;
-        }
-
-        .container {
-            text-align: center;
-            background: #000000;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        input, button, p {
-            padding: 10px;
-            margin: 10px 0;
-            width: calc(100% - 22px);
-            border: none;
-            border-radius: 10px;
-            background-color: #35FF69;
-            color: #000000;
-            box-sizing: border-box;
-        }
-
-        button {
-            cursor: pointer;
-            background-color: #35FF69;
-            color: #000000;
-            font-weight: bold;
-        }
-
-        button:hover {
-            background-color: #2ecc71;
-        }
-
-        h1 {
-            color: #ECEBE4;
-        }
-
-        label {
-            display: block;
-            margin-top: 10px;
-            color: #ECEBE4;
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
         <h1>Hesaplama PWA</h1>
-        <label for="a">Fund Size:</label>
-        <input type="number" id="a" step="any"><br><br>
+        <button class="tab-button" onclick="openTab('calculation1')">Calculation 1</button>
+        <button class="tab-button" onclick="openTab('calculation2')">Calculation 2</button>
         
-        <label for="b">Fund Loss (%):</label>
-        <input type="number" id="b" step="any"><br><br>
-        
-        <label for="c">Stop Loss (%):</label>
-        <input type="number" id="c" step="any"><br><br>
-        
-        <button onclick="hesapla()">Hesapla</button>
-        
-        <p id="sonuc"></p>
+        <div id="calculation1" class="tab-content">
+            <h2>Calculation 1</h2>
+            <label for="a">Fund Size:</label>
+            <input type="number" id="a" step="any"><br><br>
+            
+            <label for="b">Fund Loss (%):</label>
+            <input type="number" id="b" step="any"><br><br>
+            
+            <label for="c">Stop Loss (%):</label>
+            <input type="number" id="c" step="any"><br><br>
+            
+            <button onclick="hesapla()">Hesapla</button>
+            
+            <p id="sonuc"></p>
+        </div>
+
+        <div id="calculation2" class="tab-content" style="display:none">
+            <h2>Calculation 2</h2>
+            <label for="girisFiyati">Giriş Fiyatı:</label>
+            <input type="number" id="girisFiyati" step="any"><br><br>
+            
+            <label for="stopLossYuzde">Stop Loss (%):</label>
+            <input type="number" id="stopLossYuzde" step="any"><br><br>
+            
+            <button onclick="stopPriceHesapla()">Hesapla</button>
+            
+            <p id="stopPriceSonuc"></p>
+        </div>
     </div>
     <script src="app.js"></script>
     <script>
@@ -86,6 +54,19 @@
             }).catch(error => {
                 console.log('Service Worker registration failed:', error);
             });
+        }
+
+        function openTab(tabId) {
+            var i, tabcontent, tabbuttons;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tabbuttons = document.getElementsByClassName("tab-button");
+            for (i = 0; i < tabbuttons.length; i++) {
+                tabbuttons[i].className = tabbuttons[i].className.replace(" active", "");
+            }
+            document.getElementById(tabId).style.display = "block";
         }
     </script>
 </body>
