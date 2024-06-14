@@ -42,7 +42,7 @@ button:hover {
     background-color: #2ecc71;
 }
 
-h1 {
+h1, h2 {
     color: #ECEBE4;
 }
 
@@ -50,4 +50,26 @@ label {
     display: block;
     margin-top: 10px;
     color: #ECEBE4;
+}
+
+.tab-button {
+    background-color: #35FF69;
+    color: #000000;
+    border: none;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.tab-button:hover {
+    background-color: #2ecc71;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content:first-of-type {
+    display: block;
 }
